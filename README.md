@@ -1,48 +1,42 @@
-Chess
-=====
+Шахматы
+=======
 
-`chess.php` is a CLI program that displays chess games.
-It receives players' moves as arguments and prints the board state
-with figure positions after those moves.
+`chess.php` — консольный проигрыватель шахматных партий.
+Программа получает ходы игроков в качестве аргументов и выводит
+состояние доски с фигурами после этих ходов.
 
-Example:
+Например:
 
 `php chess.php e2-e4 e7-e5`
 
 <img src="example.png" width="405" height="349" alt="Example of the program execution"/>
 
-Validation:
+В текущем виде `chess.php` никак не проверяет правильность ходов.
 
-Currently `chess.php` does nothing to verify chess rules in those moves.
-And you don't need to implement each rule for the game.
+## Задача 1
 
-Add only the validations required by the tasks below.
+Задача 1: дописать программу таким образом, чтобы она выкидывала исключение
+при нарушении очерёдности хода (например, два раза подряд ход белых).
 
-## Task 1
-
-Task 1: modify the program so that it throws an exception
-when player move order is wrong (e.g. if whites make two moves in a row).
-
-To verify your solution, run tests:
+Чтобы проверить корректность решения, запустите тесты:
 
     $ ./vendor/bin/phpunit --group=rotation
 
-## Task 2
+## Задача 2
 
-Task 2: modify the program so that it throws an exception
-when a pawn makes an illegal move.
+Задача 2: дописать программу таким образом, чтобы она выкидывала исключение
+при нарушении правил хода пешкой (pawn).
 
-To verify your solution, run tests:
+Чтобы проверить корректность решения, запустите тесты:
 
     $ ./vendor/bin/phpunit --group=pawn
 
-Tests only move pawns, other figures are not moved,
-so you are safe to ignore non-pawn specifics in your solution.
+В тестах проверяются только ходы пешками, для других фигур валидацию ходов делать не нужно.
 
-### Chess pawn rules
+### Как ходит пешка
 
- * A pawn can move forward (vertically) by 1 square;
- * The first time a pawn moves, it may move forward by 2 squares instead of 1;
- * Pawns cannot jump over other figures;
- * Pawns can capture enemy figures only by diagonally moving 1 square forward;
- * En passant capture also exists, but don't bother about it :)
+ * Пешка может ходить вперёд (по вертикали) на одну клетку;
+ * Если пешка ещё ни разу не ходила, она может пойти вперёд на две клетки;
+ * Пешка не может перепрыгивать через другие фигуры;
+ * Пешка может бить фигуры противника только по диагонали вперёд на одну клетку;
+ * Также существует взятие на проходе, но им можно пренебречь :)
