@@ -2,6 +2,7 @@
 
 class Board {
     private $figures = [];
+    private $lastMoveWasBlack = null; // Track the color of the last move
 
     public function __construct() {
         $this->figures['a'][1] = new Rook(false);
@@ -51,6 +52,20 @@ class Board {
         $xTo   = $match[3];
         $yTo   = $match[4];
 
+        if (!isset($this->figures[$xFrom][$yFrom])) {
+            throw new \Exception("Invalid move $move");
+        }
+
+        $figure = $this->figures[$xFrom][$yFrom];
+        $isBlack = $figure->isBlack();
+
+        // Check if it's the correct player's turn
+        if ($this->lastMoveWasBlack === $isBlack) {
+            throw new \Exception("Invalid move $move");
+        }
+
+        $this->lastMoveWasBlack = $isBlack;
+        
         if (isset($this->figures[$xFrom][$yFrom])) {
             $this->figures[$xTo][$yTo] = $this->figures[$xFrom][$yFrom];
         }

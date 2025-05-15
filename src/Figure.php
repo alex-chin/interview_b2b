@@ -11,4 +11,8 @@ class Figure {
     public function __toString() {
         throw new \Exception("Not implemented");
     }
+    
+    public function isBlack() {
+        return $this->isBlack;
+    }
 }
